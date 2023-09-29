@@ -8,8 +8,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.ad.sdk.adserver.Listener.YeahInterstitialLoadAdListener;
 import com.ad.sdk.adserver.Listener.YeahInterstitialAdShowListener;
+import com.ad.sdk.adserver.Listener.YeahInterstitialLoadAdListener;
 
 public class YeahInterstitial {
 
@@ -35,19 +35,11 @@ public class YeahInterstitial {
 
 
             if (ad_url.length() > 0) {
-
-                if (ad_check.equalsIgnoreCase("1")) {
-                    YeahInterstitial.interstitialVideoAdListener.onYeahAdsAdLoaded();
-
-
-                } else {
-                    Log.e("Ad Shown Status", "Targeting Not Match");
-                    YeahInterstitial.interstitialVideoAdListener.onYeahAdsAdFailed();
-                }
-
-//
+                YeahInterstitial.interstitialVideoAdListener.onYeahAdsAdLoaded();
             } else {
                 Log.d("SDK", "No Ads");
+                YeahInterstitial.interstitialVideoAdListener.onYeahAdsAdFailed();
+
             }
 
 
@@ -65,7 +57,6 @@ public class YeahInterstitial {
         Intent i = new Intent(context, InterstitialLoadActivity.class);
         Log.e("InterstitialVideoStatus:", "" + "Ad is showing");
         context.startActivity(i);
-
     }
 
 }

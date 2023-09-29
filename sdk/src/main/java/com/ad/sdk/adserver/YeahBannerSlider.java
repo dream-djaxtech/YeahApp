@@ -16,7 +16,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
 import com.ad.sdk.R;
-import com.ad.sdk.adserver.Listener.InterstitialImageAdListener;
+import com.ad.sdk.adserver.Listener.YeahInterstitialImageAdListener;
 import com.ad.sdk.utils.LoadData;
 
 public class YeahBannerSlider {
@@ -25,7 +25,7 @@ public class YeahBannerSlider {
     private static final String TAG = "Interstitial_image";
 
     @SuppressLint("SetJavaScriptEnabled")
-    public static void show(Context context, InterstitialImageAdListener listener) {
+    public static void show(Context context, YeahInterstitialImageAdListener listener) {
         try {
 
             Activity activity = (Activity) context;
@@ -65,17 +65,17 @@ public class YeahBannerSlider {
                 pop = new PopupWindow(customview, ActionBar.LayoutParams.FILL_PARENT, ActionBar.LayoutParams.FILL_PARENT);
                 pop.showAtLocation(relativelayout, Gravity.CENTER, 0, 0);
                 activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                listener.onInterstitialAdShown();
+                listener.onYeahAdsAdShown();
                 close.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        listener.onInterstitialAdDismissed();
+                        listener.onYeahAdsAdDismissed();
                         pop.dismiss();
                     }
                 });
 
 
-                listener.onInterstitialAdLoaded();
+                listener.onYeahAdsAdLoaded();
             }
 
         } catch (Exception e) {

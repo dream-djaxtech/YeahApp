@@ -9,4 +9,6 @@ public interface YeahInterstitialAdShowListener {
     void onYeahAdsShowClick();
 
     void onYeahAdsShowComplete();
+
+    void onYeahAdsDismissed();
 }

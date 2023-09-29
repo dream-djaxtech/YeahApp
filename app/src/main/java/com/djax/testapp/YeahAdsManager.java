@@ -7,8 +7,8 @@ import android.widget.Toast;
 
 import com.ad.sdk.adserver.Listener.AdViewListener;
 import com.ad.sdk.adserver.Listener.BannerListener;
-import com.ad.sdk.adserver.Listener.InterstitialImageAdListener;
 import com.ad.sdk.adserver.Listener.YeahInterstitialAdShowListener;
+import com.ad.sdk.adserver.Listener.YeahInterstitialImageAdListener;
 import com.ad.sdk.adserver.Listener.YeahInterstitialLoadAdListener;
 import com.ad.sdk.adserver.Listener.YeahRewardedAdLoadListener;
 import com.ad.sdk.adserver.Listener.YeahRewardedAdShowListener;
@@ -62,29 +62,29 @@ public class YeahAdsManager {
 
     public static void showIntImage() {
 
-        YeahInterstitialImage.show(mActivity, new InterstitialImageAdListener() {
+        YeahInterstitialImage.show(mActivity, new YeahInterstitialImageAdListener() {
             @Override
-            public void onInterstitialAdLoaded() {
+            public void onYeahAdsAdLoaded() {
 
             }
 
             @Override
-            public void onInterstitialAdFailed() {
+            public void onYeahAdsAdFailed() {
 
             }
 
             @Override
-            public void onInterstitialAdShown() {
+            public void onYeahAdsAdShown() {
 
             }
 
             @Override
-            public void onInterstitialAdClicked() {
+            public void onYeahAdsAdClicked() {
 
             }
 
             @Override
-            public void onInterstitialAdDismissed() {
+            public void onYeahAdsAdDismissed() {
 
             }
         });
@@ -156,6 +156,13 @@ public class YeahAdsManager {
             @SuppressLint("LongLogTag")
             @Override
             public void onYeahAdsShowComplete() {
+                Log.e("Interstitial Video Show Status :", "" + "Ad Completed");
+
+            }
+
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onYeahAdsDismissed() {
                 Log.e("Interstitial Video Show Status :", "" + "Ad Dismissed");
 
             }

@@ -19,9 +19,8 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
 import com.ad.sdk.R;
-import com.ad.sdk.adserver.Listener.InterstitialImageAdListener;
+import com.ad.sdk.adserver.Listener.YeahInterstitialImageAdListener;
 import com.ad.sdk.utils.LoadData;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
 
 public class YeahInterstitialImage {
     static PopupWindow pop;
@@ -29,7 +28,7 @@ public class YeahInterstitialImage {
 
 
     @SuppressLint("SetJavaScriptEnabled")
-    public static void show(Context context, InterstitialImageAdListener interstitialImageAdListener) {
+    public static void show(Context context, YeahInterstitialImageAdListener interstitialImageAdListener) {
         try {
 
             SharedPreferences sharedPreferences = context.getSharedPreferences("InterstitialImage", MODE_PRIVATE);
@@ -69,7 +68,7 @@ public class YeahInterstitialImage {
                     }
                     Log.d("mSDK Debug", "HTML CODE:" + HtmlCode);
 
-                    interstitialImageAdListener.onInterstitialAdLoaded();
+                    interstitialImageAdListener.onYeahAdsAdLoaded();
 
                     webView.setBackgroundColor(0);
                     webView.setPadding(0, 0, 0, 0);
@@ -84,27 +83,27 @@ public class YeahInterstitialImage {
                         @Override
                         public void onClick(View view) {
 
-                            interstitialImageAdListener.onInterstitialAdClicked();
+                            interstitialImageAdListener.onYeahAdsAdClicked();
 
                         }
                     });
 
-                    interstitialImageAdListener.onInterstitialAdShown();
+                    interstitialImageAdListener.onYeahAdsAdShown();
 
                     activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
                     pop = new PopupWindow(customview, ActionBar.LayoutParams.FILL_PARENT, ActionBar.LayoutParams.FILL_PARENT);
                     pop.showAtLocation(relativelayout, Gravity.CENTER, 0, 0);
-                    interstitialImageAdListener.onInterstitialAdShown();
+                    interstitialImageAdListener.onYeahAdsAdShown();
                     close.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            interstitialImageAdListener.onInterstitialAdDismissed();
+                            interstitialImageAdListener.onYeahAdsAdDismissed();
                             pop.dismiss();
                         }
                     });
 
 
-                    interstitialImageAdListener.onInterstitialAdLoaded();
+                    interstitialImageAdListener.onYeahAdsAdLoaded();
                 }
 
             }

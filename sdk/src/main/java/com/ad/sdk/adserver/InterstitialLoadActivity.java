@@ -15,6 +15,7 @@ import androidx.multidex.MultiDex;
 import com.ad.sdk.R;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
+import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.ext.ima.ImaAdsLoader;
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory;
 import com.google.android.exoplayer2.source.MediaSourceFactory;
@@ -23,7 +24,7 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSource;
 import com.google.android.exoplayer2.util.Util;
 
-public class InterstitialLoadActivity extends AppCompatActivity {
+public class InterstitialLoadActivity extends AppCompatActivity implements Player.Listener {
     private StyledPlayerView playerView;
     private ExoPlayer player;
     private ImaAdsLoader adsLoader;
@@ -42,10 +43,10 @@ public class InterstitialLoadActivity extends AppCompatActivity {
         adsLoader = new ImaAdsLoader.Builder(this).build();
 
         ((ImageView) findViewById(R.id.img_close_btn)).setOnClickListener(view -> {
+            YeahInterstitial.int_show_listener.onYeahAdsDismissed();
             playerView.onPause();
             adsLoader.setPlayer(null);
             playerView.setPlayer(null);
-
             finish();
         });
     }
@@ -111,6 +112,14 @@ public class InterstitialLoadActivity extends AppCompatActivity {
         player.setPlayWhenReady(true);
     }
 
+    @Override
+    public void onPlaybackStateChanged(int playbackState) {
+        if (playbackState == Player.STATE_ENDED) {
+            YeahInterstitial.int_show_listener.onYeahAdsShowComplete();
+        } else if (playbackState == Player.EVENT_PLAYER_ERROR) {
+            YeahInterstitial.int_show_listener.onYeahAdsShowFailure();
+        }
+    }
 
     @Override
     public void onStart() {
@@ -120,6 +129,7 @@ public class InterstitialLoadActivity extends AppCompatActivity {
             initializePlayer();
             if (playerView != null) {
                 playerView.onResume();
+                YeahInterstitial.int_show_listener.onYeahAdsShowStart();
             }
         }
     }
